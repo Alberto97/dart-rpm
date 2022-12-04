@@ -1,0 +1,50 @@
+name: Check Dart SDK updates
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 1 * * *'
+
+env:
+  USER: Github Actions <github-actions@users.noreply.github.com>
+  COMMENT: Update Dart SDK
+
+jobs:
+  check-dart-updates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Python requirements
+        run: pip install requests
+
+      - name: Install rpmdev-packager
+        uses: supplypike/setup-bin@v1
+        with:
+          uri: https://pagure.io/rpmdevtools/raw/main/f/rpmdev-packager
+          name: rpmdev-packager
+          version: 1.0.0
+
+      - name: Install rpmdev-bumpspec
+        uses: supplypike/setup-bin@v1
+        with:
+          uri: https://pagure.io/rpmdevtools/raw/main/f/rpmdev-bumpspec
+          name: rpmdev-bumpspec
+          version: 1.0.0
+
+      - name: Retrieve latest Dart SDK version
+        run: echo "dart_version=$(python dart-latest-version.py)" >> $GITHUB_ENV
+
+      - name: Bump Dart SDK version in the spec file
+        run: rpmdev-bumpspec -D -u "$USER" -c "$COMMENT" dart.spec -n "${{ env.dart_version }}"
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update Dart SDK to v${{ env.dart_version }}
+          commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
