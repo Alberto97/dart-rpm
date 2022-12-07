@@ -31,3 +31,4 @@ jobs:
         with:
           commit_message: Update Dart SDK to v${{ env.dart_version }}
           commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          tagging_message: v${{ env.dart_version }}-1
