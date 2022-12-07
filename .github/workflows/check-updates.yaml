@@ -12,8 +12,12 @@ env:
 jobs:
   check-dart-updates:
     runs-on: ubuntu-latest
+    container: fedora:latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Install rpmdevtools
+        run: dnf -y install rpmdevtools
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -22,20 +26,6 @@ jobs:
 
       - name: Install Python requirements
         run: pip install requests
-
-      - name: Install rpmdev-packager
-        uses: supplypike/setup-bin@v1
-        with:
-          uri: https://pagure.io/rpmdevtools/raw/main/f/rpmdev-packager
-          name: rpmdev-packager
-          version: 1.0.0
-
-      - name: Install rpmdev-bumpspec
-        uses: supplypike/setup-bin@v1
-        with:
-          uri: https://pagure.io/rpmdevtools/raw/main/f/rpmdev-bumpspec
-          name: rpmdev-bumpspec
-          version: 1.0.0
 
       - name: Retrieve latest Dart SDK version
         run: echo "dart_version=$(python dart-latest-version.py)" >> $GITHUB_ENV
