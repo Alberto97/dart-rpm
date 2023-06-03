@@ -12,7 +12,8 @@ env:
 jobs:
   check-dart-updates:
     runs-on: ubuntu-latest
-    container: ghcr.io/alberto97/fedora-rpm-dev:latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
 
@@ -20,11 +21,9 @@ jobs:
         run: echo "dart_version=$(python dart-latest-version.py)" >> $GITHUB_ENV
 
       - name: Bump Dart SDK version in the spec file
-        run: rpmdev-bumpspec -D -u "$USER" -c "$COMMENT" dart.spec -n "${{ env.dart_version }}"
-
-      # Workaround for https://github.com/actions/runner/issues/2033
-      - name: Set git safe.directory
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+        uses: docker://ghcr.io/alberto97/fedora-rpm-dev:latest
+        with:
+          args: rpmdev-bumpspec -D -u "${{ env.USER }}" -c "${{ env.COMMENT }}" dart.spec -n "${{ env.dart_version }}"
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
