@@ -1,5 +1,5 @@
 Name:           dart
-Version:        3.3.4
+Version:        3.4.0
 Release:        1%{?dist}
 Summary:        Dart SDK
 
@@ -39,6 +39,9 @@ cp -pr . %{buildroot}%{_libdir}/dart
 %{_libdir}/dart/*
 
 %changelog
+* Tue May 14 2024 Github Actions <github-actions@users.noreply.github.com> - 3.4.0-1
+- Update Dart SDK
+
 * Thu Apr 18 2024 Github Actions <github-actions@users.noreply.github.com> - 3.3.4-1
 - Update Dart SDK
 
