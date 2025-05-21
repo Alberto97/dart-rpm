@@ -1,5 +1,5 @@
 Name:           dart
-Version:        3.7.3
+Version:        3.8.0
 Release:        1%{?dist}
 Summary:        Dart SDK
 
@@ -39,6 +39,9 @@ cp -pr . %{buildroot}%{_libdir}/dart
 %{_libdir}/dart/*
 
 %changelog
+* Wed May 21 2025 Github Actions <github-actions@users.noreply.github.com> - 3.8.0-1
+- Update Dart SDK
+
 * Fri Apr 18 2025 Github Actions <github-actions@users.noreply.github.com> - 3.7.3-1
 - Update Dart SDK
 
