@@ -4,7 +4,7 @@
 
 Name:           dart
 Version:        3.8.0
-Release:        2%{?dist}
+Release:        1%{?dist}
 Summary:        Dart SDK
 
 License:        BSD
@@ -43,6 +43,9 @@ cp -pr . %{buildroot}%{_libdir}/dart
 %{_libdir}/dart/*
 
 %changelog
+* Fri May 23 2025 Github Actions <github-actions@users.noreply.github.com> - 3.8.0-1
+- Update Dart SDK
+
 * Thu May 22 2025 Alberto Pedron <albertop2197@gmail.com> - 3.8.0-2
 - Disable debug info
 
