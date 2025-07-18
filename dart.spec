@@ -11,9 +11,8 @@ License:        BSD
 URL:            https://dart.dev/
 
 Source0:        https://storage.googleapis.com/dart-archive/channels/stable/release/%{version}/sdk/dartsdk-linux-x64-release.zip
-Source1:        https://storage.googleapis.com/dart-archive/channels/stable/release/%{version}/sdk/dartsdk-linux-ia32-release.zip
-Source2:        https://storage.googleapis.com/dart-archive/channels/stable/release/%{version}/sdk/dartsdk-linux-arm64-release.zip
-Source3:        https://storage.googleapis.com/dart-archive/channels/stable/release/%{version}/sdk/dartsdk-linux-arm-release.zip
+Source1:        https://storage.googleapis.com/dart-archive/channels/stable/release/%{version}/sdk/dartsdk-linux-arm64-release.zip
+Source2:        https://storage.googleapis.com/dart-archive/channels/stable/release/%{version}/sdk/dartsdk-linux-arm-release.zip
 
 %description
 The Dart SDK has the libraries and command-line tools that you need to develop Dart web, command-line, and server apps.
@@ -22,12 +21,10 @@ The Dart SDK has the libraries and command-line tools that you need to develop D
 
 %ifarch x86_64
 %autosetup -T -b 0 -n dart-sdk
-%elifarch %{ix86}
-%autosetup -T -b 1 -n dart-sdk
 %elifarch aarch64
-%autosetup -T -b 2 -n dart-sdk
+%autosetup -T -b 1 -n dart-sdk
 %elifarch %{arm}
-%autosetup -T -b 3 -n dart-sdk
+%autosetup -T -b 2 -n dart-sdk
 %endif
 
 %install
