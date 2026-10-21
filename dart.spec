@@ -3,7 +3,7 @@
 %define __os_install_post %{nil}
 
 Name:           dart
-Version:        3.13.5
+Version:        3.13.6
 Release:        1%{?dist}
 Summary:        Dart SDK
 
@@ -40,6 +40,9 @@ cp -pr . %{buildroot}%{_libdir}/dart
 %{_libdir}/dart/*
 
 %changelog
+* Wed Oct 21 2026 Github Actions <github-actions@users.noreply.github.com> - 3.13.6-1
+- Update Dart SDK
+
 * Wed Sep 30 2026 Github Actions <github-actions@users.noreply.github.com> - 3.13.5-1
 - Update Dart SDK
 
